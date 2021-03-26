@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import axiosWithAuth from '../helpers/axiosWithAuth';
+
 import EditMenu from './EditMenu';
 
 const initialColor = {
@@ -20,9 +22,31 @@ const ColorList = ({ colors, updateColors }) => {
   const saveEdit = e => {
     e.preventDefault();
 
+    axiosWithAuth()
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        console.log(res);
+        updateColors(colors.map(color => (
+          color.id === colorToEdit.id ? colorToEdit : color
+        )));
+        setEditing(false);
+        setColorToEdit(initialColor);
+      })
+      .catch(err => {
+        console.error(err);
+      })
   };
 
   const deleteColor = color => {
+    axiosWithAuth()
+      .delete(`/api/colors/${color.id}`)
+      .then(res => {
+        console.log(res);
+        updateColors(colors.filter(item => item.id !== color.id));
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   return (
