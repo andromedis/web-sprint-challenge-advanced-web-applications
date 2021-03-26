@@ -1,3 +1,4 @@
+// Library imports
 import axios from "axios";
 
 const axiosWithAuth = () => {
@@ -11,6 +12,7 @@ const axiosWithAuth = () => {
     });
 }
 
+// Default export
 export default axiosWithAuth;
 
 //Task List:

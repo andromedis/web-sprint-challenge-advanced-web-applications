@@ -13,10 +13,13 @@ const defaultValues = {
 }
 
 const Login = () => {
+  // Form and error state
   const [credentials, setCredentials] = useState(defaultValues.credentials);
   const [errorMessage, setErrorMessage] = useState(defaultValues.errorMessage);
 
+  // Push to history function
   const { push } = useHistory();
+
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
@@ -26,6 +29,7 @@ const Login = () => {
     
   });
 
+  // Event handlers for form changes and submissions
   const loginRequest = evt => {
     evt.preventDefault();
 
@@ -34,7 +38,7 @@ const Login = () => {
         console.log(res);
         setErrorMessage(defaultValues.errorMessage);
         localStorage.setItem('token', res.data.payload);
-        // push('/bubbles');
+        push('/bubbles');
       })
       .catch(err => {
         console.error(err);
@@ -83,6 +87,7 @@ const Login = () => {
   );
 };
 
+// Default export
 export default Login;
 
 //Task List:
