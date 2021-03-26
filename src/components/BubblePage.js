@@ -9,6 +9,7 @@ import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
 const BubblePage = () => {
+  // State for list of colors
   const [colorList, setColorList] = useState([]);
 
   // Effect calls API to get colors when component mounts

@@ -1,19 +1,24 @@
+// Library imports
 import React, { useState } from "react";
-import axios from "axios";
 
+// Utility imports
 import axiosWithAuth from '../helpers/axiosWithAuth';
 
+// Component imports
 import EditMenu from './EditMenu';
 
+// Empty default values
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
 const ColorList = ({ colors, updateColors }) => {
+  // State for editing  and color being edited status
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  // Helper functions
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -34,7 +39,7 @@ const ColorList = ({ colors, updateColors }) => {
       })
       .catch(err => {
         console.error(err);
-      })
+      });
   };
 
   const deleteColor = color => {
@@ -78,6 +83,7 @@ const ColorList = ({ colors, updateColors }) => {
   );
 };
 
+// Default export
 export default ColorList;
 
 //Task List:
