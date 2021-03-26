@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 
 // Utility imports
-import axiosWithAuth from "../helpers/axiosWithAuth";
+// import axiosWithAuth from "../helpers/axiosWithAuth";
+import { fetchColors } from '../helpers/fetchColors';
 
 // Component imports
 import Bubbles from "./Bubbles";
@@ -14,16 +15,19 @@ const BubblePage = () => {
 
   // Effect calls API to get colors when component mounts
   useEffect(() => {
-    axiosWithAuth()
-      .get(`/api/colors`)
+    getColors();
+  }, [])
+
+  const getColors = () => {
+    fetchColors()
       .then(res => {
         console.log(res);
         setColorList(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       })
-  }, [])
+  }
 
   return (
     <>
